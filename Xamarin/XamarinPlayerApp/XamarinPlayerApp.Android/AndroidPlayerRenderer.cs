@@ -12,7 +12,8 @@ using XamarinPlayerApp.Droid;
 [assembly: ExportRenderer(typeof(CameraView), typeof(AndroidPlayerRenderer))]
 namespace XamarinPlayerApp.Droid
 {
-    internal class AndroidPlayerRenderer : ViewRenderer<CameraView, Com.Ocuvera.Rtspplayer.GStreamerSurfaceView>, ISurfaceHolderCallback
+    internal class AndroidPlayerRenderer : ViewRenderer<CameraView, GStreamerSurfaceView>, ISurfaceHolderCallback
+    //internal class AndroidPlayerRenderer : ViewRenderer<CameraView, Com.Ocuvera.Rtspplayer.GStreamerSurfaceView>, ISurfaceHolderCallback
     {
         private GStreamerSurfaceView _gstreamerSurfaceView;
         private Context _context;
@@ -38,7 +39,7 @@ namespace XamarinPlayerApp.Droid
             if (isInitialized)
             {
                 // play the video. 
-                _interop.SetUri("rtsp://???");
+                _interop.SetUri("");
                 _interop.SetPosition(0);
                 _interop.Play();
             }
@@ -54,11 +55,15 @@ namespace XamarinPlayerApp.Droid
 
             if (Control == null)
             {
-                // instantiate the gstreamer surface view
+                //// instantiate the gstreamer surface view
+                //_gstreamerSurfaceView = new GStreamerSurfaceView(_context);
+                //// register for callbacks with its view holder
+                //_gstreamerSurfaceView.Holder.AddCallback(this);
+                //// set the control to be rendered by this instance of AndroidPlayerRenderer to the gstraemer surface view
+                //SetNativeControl(_gstreamerSurfaceView);
+
                 _gstreamerSurfaceView = new GStreamerSurfaceView(_context);
-                // register for callbacks with its view holder
                 _gstreamerSurfaceView.Holder.AddCallback(this);
-                // set the control to be rendered by this instance of AndroidPlayerRenderer to the gstraemer surface view
                 SetNativeControl(_gstreamerSurfaceView);
 
                 if (!_initialized)
